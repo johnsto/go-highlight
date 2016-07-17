@@ -25,9 +25,9 @@ func TestLexerJSONSimple(t *testing.T) {
 		Subject string
 		Tokens  []Token
 	}{
-		{"boolean", 4, "true", []Token{{Value: "true", Type: Constant}}},
-		{"boolean", 5, "false", []Token{{Value: "false", Type: Constant}}},
-		{"boolean", 4, "null", []Token{{Value: "null", Type: Constant}}},
+		{"boolean", 4, "true", []Token{{Value: "true", Type: Literal}}},
+		{"boolean", 5, "false", []Token{{Value: "false", Type: Literal}}},
+		{"boolean", 4, "null", []Token{{Value: "null", Type: Literal}}},
 		{"number", 1, "0", []Token{{Value: "0", Type: Number}}},
 		{"number", 2, "-0", []Token{{Value: "-0", Type: Number}}},
 		{"number", 3, "0.0", []Token{{Value: "0.0", Type: Number}}},
@@ -96,7 +96,7 @@ func TestLexerJSONComplex(t *testing.T) {
 		}},
 		{"array", "[null]", []simpleToken{
 			{"[", Punctuation},
-			{"null", Constant},
+			{"null", Literal},
 			{"]", Punctuation},
 		}},
 		{"array", "[123]", []simpleToken{

@@ -17,7 +17,7 @@ var JSON = Lexer{
 			{Regexp: "\\s+", Type: Whitespace},
 		},
 		"boolean": {
-			{Regexp: "(true|false|null)", Type: Constant},
+			{Regexp: "(true|false|null)", Type: Literal},
 		},
 		"number": {
 			// -123.456e+78

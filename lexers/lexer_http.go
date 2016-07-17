@@ -7,7 +7,7 @@ var HTTP = Lexer{
 	States: StatesSpec{
 		"root": {
 			{Regexp: `^(HTTP)(/)([0-9\.]+)( )([0-9]+)(.*)(\r\n)$`,
-				SubTypes: []TokenType{Entity, Punctuation, Entity,
+				SubTypes: []TokenType{Tag, Punctuation, Tag,
 					Whitespace, Number, Whitespace, String, Whitespace},
 				State: "headers"},
 		},

@@ -21,8 +21,8 @@ func NewOutput() *Output {
 			highlight.Assignment:  color.New(color.FgYellow, color.Faint),
 			highlight.Operator:    color.New(color.FgGreen),
 			highlight.Punctuation: color.New(color.FgYellow),
-			highlight.Constant:    color.New(color.FgBlue, color.Bold),
-			highlight.Entity:      color.New(color.FgHiYellow),
+			highlight.Literal:    color.New(color.FgBlue, color.Bold),
+			highlight.Tag:      color.New(color.FgHiYellow),
 			highlight.Whitespace:  color.New(color.FgWhite),
 		},
 	}
