@@ -14,6 +14,7 @@ type Lexer struct {
 	Name      string
 	States    States
 	Filters   Filters
+	Formatter Filter
 	Filenames []string
 	MimeTypes []string
 }
@@ -29,6 +30,8 @@ func (l Lexer) Tokenize(r io.Reader, emit func(Token) error) error {
 
 	br := bufio.NewReaderSize(r, 128)
 
+	emit = l.Filters.Filter(l, emit)
+
 	stack := &Stack{"root"}
 	eol := false
 	var subject = ""
@@ -40,7 +43,6 @@ func (l Lexer) Tokenize(r io.Reader, emit func(Token) error) error {
 		} else if err == io.EOF {
 			eol = true
 		} else if err != nil {
-			// something bad happened....
 			return emit(EndToken)
 		} else {
 			eol = strings.HasSuffix(next, "\n")

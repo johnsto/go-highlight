@@ -46,7 +46,7 @@ var PassthroughFilter = FilterFunc(
 var RemoveEmptiesFilter = FilterFunc(
 	func(l Lexer, out func(Token) error) func(Token) error {
 		return func(t Token) error {
-			if t.Value != "" {
+			if t == EndToken || t.Value != "" {
 				return out(t)
 			}
 			return nil

@@ -25,9 +25,9 @@ func TestLexerJSONSimple(t *testing.T) {
 		Subject string
 		Tokens  []Token
 	}{
-		{"boolean", 4, "true", []Token{{Value: "true", Type: Literal}}},
-		{"boolean", 5, "false", []Token{{Value: "false", Type: Literal}}},
-		{"boolean", 4, "null", []Token{{Value: "null", Type: Literal}}},
+		{"literal", 4, "true", []Token{{Value: "true", Type: Literal}}},
+		{"literal", 5, "false", []Token{{Value: "false", Type: Literal}}},
+		{"literal", 4, "null", []Token{{Value: "null", Type: Literal}}},
 		{"number", 1, "0", []Token{{Value: "0", Type: Number}}},
 		{"number", 2, "-0", []Token{{Value: "-0", Type: Number}}},
 		{"number", 3, "0.0", []Token{{Value: "0.0", Type: Number}}},
@@ -128,7 +128,6 @@ func TestLexerJSONComplex(t *testing.T) {
 			{`"`, Punctuation},
 			{"key", Attribute},
 			{`"`, Punctuation},
-			{"", Whitespace},
 			{":", Assignment},
 			{`"`, Punctuation},
 			{"value", String},
@@ -140,7 +139,6 @@ func TestLexerJSONComplex(t *testing.T) {
 			{`"`, Punctuation},
 			{"key", Attribute},
 			{`"`, Punctuation},
-			{"", Whitespace},
 			{":", Assignment},
 			{"\n", Whitespace},
 			{`"`, Punctuation},
@@ -153,7 +151,6 @@ func TestLexerJSONComplex(t *testing.T) {
 			{`"`, Punctuation},
 			{`ke\ty`, Attribute},
 			{`"`, Punctuation},
-			{``, Whitespace},
 			{`:`, Assignment},
 			{`"`, Punctuation},
 			{`v\nalu\re\"`, String},
@@ -180,7 +177,6 @@ func TestLexerJSONComplex(t *testing.T) {
 			{`"`, Punctuation},
 			{`aa`, Attribute},
 			{`"`, Punctuation},
-			{``, Whitespace},
 			{`:`, Assignment},
 			{`"`, Punctuation},
 			{`bb`, String},
@@ -189,7 +185,6 @@ func TestLexerJSONComplex(t *testing.T) {
 			{`"`, Punctuation},
 			{`cc`, Attribute},
 			{`"`, Punctuation},
-			{``, Whitespace},
 			{`:`, Assignment},
 			{`"`, Punctuation},
 			{`dd`, String},
@@ -201,7 +196,6 @@ func TestLexerJSONComplex(t *testing.T) {
 			{`"`, Punctuation},
 			{`key`, Attribute},
 			{`"`, Punctuation},
-			{``, Whitespace},
 			{`:`, Assignment},
 			{"[", Punctuation},
 			{"1", Number},
@@ -214,7 +208,6 @@ func TestLexerJSONComplex(t *testing.T) {
 			{`"`, Punctuation},
 			{"a", Attribute},
 			{`"`, Punctuation},
-			{"", Whitespace},
 			{":", Assignment},
 			{`"`, Punctuation},
 			{"b", String},
@@ -231,9 +224,7 @@ func TestLexerJSONComplex(t *testing.T) {
 			fmt.Sprintf("tokeniser should return EOF"))
 		if !assert.Equal(t, len(item.Tokens), len(tokens),
 			fmt.Sprintf("number of tokens in %#v should match", item.Subject)) {
-			fmt.Println(tokens)
-			fmt.Println(item.Tokens)
-			fmt.Println()
+			//fmt.Println(tokens, item.Tokens)
 		}
 		for i, token := range tokens {
 			if i >= len(item.Tokens) {

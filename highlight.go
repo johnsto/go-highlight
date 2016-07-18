@@ -1,6 +1,9 @@
 package highlight
 
-import "io"
+import (
+	"fmt"
+	"io"
+)
 
 var Debug bool = false
 
@@ -10,6 +13,10 @@ type Token struct {
 	Value string
 	Type  TokenType
 	State string
+}
+
+func (t Token) String() string {
+	return fmt.Sprintf("(%s:%#v {%s})", t.Type, t.Value, t.State)
 }
 
 // Tokenizer represents a type capable of tokenizing data from an input
