@@ -16,6 +16,11 @@ func GetTokenizer(name string) Tokenizer {
 	return tokenizers[name]
 }
 
+// GetTokenizers returns the map of known Tokenizers.
+func GetTokenizers() map[string]Tokenizer {
+	return tokenizers
+}
+
 // GetTokenizerForContentType returns a Tokenizer for the given content type
 // (e.g. "text/html" or "application/json"), or nil if one is not found.
 func GetTokenizerForContentType(contentType string) (Tokenizer, error) {

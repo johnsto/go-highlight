@@ -8,15 +8,15 @@ type Filter interface {
 	// modifying or filtering them along the way. The function should return
 	// as soon as the input is exhausted (i.e. the channel is closed), or an
 	// error is encountered.
-	Filter(lexer Lexer, out func(Token) error) func(Token) error
+	Filter(out func(Token) error) func(Token) error
 }
 
 // FilterFunc is a helper type allowing filter functions to be used as
 // filters.
-type FilterFunc func(lexer Lexer, out func(Token) error) func(Token) error
+type FilterFunc func(out func(Token) error) func(Token) error
 
-func (f FilterFunc) Filter(lexer Lexer, out func(Token) error) func(Token) error {
-	return f(lexer, out)
+func (f FilterFunc) Filter(out func(Token) error) func(Token) error {
+	return f(out)
 }
 
 type Filters []Filter
@@ -26,9 +26,9 @@ type Filters []Filter
 // been processed, or iff an error is encountered by one of the filters.
 //
 // It is safe to close the output channel as soon as this function returns.
-func (fs Filters) Filter(lexer Lexer, out func(Token) error) func(Token) error {
+func (fs Filters) Filter(out func(Token) error) func(Token) error {
 	for _, f := range fs {
-		out = f.Filter(lexer, out)
+		out = f.Filter(out)
 	}
 	return out
 }
@@ -36,7 +36,7 @@ func (fs Filters) Filter(lexer Lexer, out func(Token) error) func(Token) error {
 // PassthroughFilter simply emits each token to the output without
 // modification.
 var PassthroughFilter = FilterFunc(
-	func(l Lexer, out func(Token) error) func(Token) error {
+	func(out func(Token) error) func(Token) error {
 		return func(t Token) error {
 			return out(t)
 		}
@@ -44,7 +44,7 @@ var PassthroughFilter = FilterFunc(
 
 // RemoveEmptiesFilter removes empty (zero-length) tokens from the output.
 var RemoveEmptiesFilter = FilterFunc(
-	func(l Lexer, out func(Token) error) func(Token) error {
+	func(out func(Token) error) func(Token) error {
 		return func(t Token) error {
 			if t == EndToken || t.Value != "" {
 				return out(t)
@@ -55,7 +55,7 @@ var RemoveEmptiesFilter = FilterFunc(
 
 // MergeTokensFilter combines Tokens if they have the same type.
 var MergeTokensFilter = FilterFunc(
-	func(lexer Lexer, out func(Token) error) func(Token) error {
+	func(out func(Token) error) func(Token) error {
 		curr := Token{}
 
 		return func(t Token) error {

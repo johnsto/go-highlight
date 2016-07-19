@@ -19,6 +19,13 @@ type Lexer struct {
 	MimeTypes []string
 }
 
+func (l Lexer) Format(r io.Reader, emit func(Token) error) error {
+	if l.Formatter == nil {
+		return l.Tokenize(r, emit)
+	}
+	return l.Tokenize(r, l.Formatter.Filter(emit))
+}
+
 // Tokenize reads from the given input and emits tokens to the output channel.
 // Will end on any error from the reader, including io.EOF to signify the end
 // of input.
@@ -30,7 +37,7 @@ func (l Lexer) Tokenize(r io.Reader, emit func(Token) error) error {
 
 	br := bufio.NewReaderSize(r, 128)
 
-	emit = l.Filters.Filter(l, emit)
+	emit = l.Filters.Filter(emit)
 
 	stack := &Stack{"root"}
 	eol := false
@@ -157,5 +164,16 @@ func (l Lexer) AcceptsMediaType(media string) (bool, error) {
 		}
 	}
 	return false, nil
+}
 
+// ListMediaTypes lists the media types this Lexer supports,
+// e.g. ["application/json"]
+func (l Lexer) ListMediaTypes() []string {
+	return l.MimeTypes
+}
+
+// ListFilenames lists the filename patterns this Lexer supports,
+// e.g. ["*.json"]
+func (l Lexer) ListFilenames() []string {
+	return l.Filenames
 }

@@ -6,7 +6,7 @@ import (
 )
 
 var JSON = Lexer{
-	Name:      "JSON",
+	Name:      "json",
 	MimeTypes: []string{"application/json"},
 	Filenames: []string{"*.json"},
 	States: StatesSpec{
@@ -92,7 +92,7 @@ type JSONFormatter struct {
 	Indent string
 }
 
-func (f *JSONFormatter) Filter(lexer Lexer, emit func(Token) error) func(
+func (f *JSONFormatter) Filter(emit func(Token) error) func(
 	Token) error {
 
 	// indents records the current indentation level

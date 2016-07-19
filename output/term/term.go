@@ -1,6 +1,8 @@
 package term
 
 import (
+	"os"
+
 	"bitbucket.org/johnsto/go-highlight"
 	"github.com/fatih/color"
 )
@@ -21,8 +23,8 @@ func NewOutput() *Output {
 			highlight.Assignment:  color.New(color.FgYellow, color.Faint),
 			highlight.Operator:    color.New(color.FgGreen),
 			highlight.Punctuation: color.New(color.FgYellow),
-			highlight.Literal:    color.New(color.FgBlue, color.Bold),
-			highlight.Tag:      color.New(color.FgHiYellow),
+			highlight.Literal:     color.New(color.FgBlue, color.Bold),
+			highlight.Tag:         color.New(color.FgHiYellow),
 			highlight.Whitespace:  color.New(color.FgWhite),
 		},
 	}
@@ -37,4 +39,9 @@ func (o *Output) Emit(t highlight.Token) error {
 		_, err := c.Printf("%s", t.Value)
 		return err
 	}
+}
+
+func (o *Output) SetFile(f *os.File) error {
+	color.Output = f
+	return nil
 }

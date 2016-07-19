@@ -3,7 +3,7 @@ package lexers
 import . "bitbucket.org/johnsto/go-highlight"
 
 var CSS = Lexer{
-	Name:      "CSS",
+	Name:      "css",
 	MimeTypes: []string{"text/css"},
 	Filenames: []string{"*.css"},
 	States: StatesSpec{
