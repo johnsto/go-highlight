@@ -29,11 +29,13 @@ type (
 		Include string
 	}
 
+	// IncludeRule allows the states of another Rule to be included.
 	IncludeRule struct {
 		StateMap  *StateMap
 		StateName string
 	}
 
+	// RegexpRule matches a state if the subject matches a regular expression.
 	RegexpRule struct {
 		Regexp     *regexp.Regexp
 		Type       TokenType
@@ -42,6 +44,7 @@ type (
 	}
 )
 
+// Compile converts the RuleSpec shorthand into a fully-fledged Rule.
 func (rs RuleSpec) Compile(sm *StateMap) Rule {
 	if rs.Include != "" {
 		return IncludeRule{
@@ -53,6 +56,7 @@ func (rs RuleSpec) Compile(sm *StateMap) Rule {
 		strings.Split(rs.State, " "))
 }
 
+// NewRegexpRule creates a new regular expression Rule.
 func NewRegexpRule(re string, t TokenType, subTypes []TokenType,
 	next []string) RegexpRule {
 	return RegexpRule{
