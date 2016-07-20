@@ -31,7 +31,7 @@ func TestFilters(t *testing.T) {
 		},
 	}, {
 		Name: "error",
-		Filters: Filters{FilterFunc(func(l Lexer, out func(Token) error) func(Token) error {
+		Filters: Filters{FilterFunc(func(out func(Token) error) func(Token) error {
 			return func(t Token) error {
 				return io.EOF
 			}
@@ -86,7 +86,7 @@ func testFilters(t *testing.T, filters Filters, input, expected []Token,
 
 	pos := 0
 
-	filter := filters.Filter(Lexer{}, func(token Token) error {
+	filter := filters.Filter(func(token Token) error {
 		assert.Equal(t, expected[pos], token, name)
 		pos++
 		return nil

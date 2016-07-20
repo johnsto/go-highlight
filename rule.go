@@ -29,7 +29,7 @@ type (
 		Include string
 	}
 
-	// IncludeRule allows the states of another Rule to be included.
+	// IncludeRule allows the states of another Rule to be referenced.
 	IncludeRule struct {
 		StateMap  *StateMap
 		StateName string
@@ -156,6 +156,7 @@ func (r IncludeRule) Find(subject string) (int, Rule) {
 func (r IncludeRule) Match(subject string) (int, Rule, []Token, error) {
 	state := r.StateMap.Get(r.StateName)
 	n, rl, ts, err := state.Match(subject)
+	// set `State` property of each Token so they show the actual State.
 	for _, t := range ts {
 		t.State = r.StateName
 	}

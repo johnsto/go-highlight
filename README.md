@@ -63,3 +63,9 @@ Then instantiate the emitter and tokenize to it:
 emitter = output.NewDebugOutputter()
 err = tokenizer.Tokenize(reader, emitter.Emit)
 ```
+
+Or for formatted (indented) output, use `Format` instead:
+
+```go
+err = tokenizer.Format(reader, emitter.Emit)
+```
