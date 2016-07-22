@@ -7,10 +7,10 @@ import (
 	"os"
 	"path"
 
-	"bitbucket.org/johnsto/go-highlight"
-	_ "bitbucket.org/johnsto/go-highlight/lexers"
-	"bitbucket.org/johnsto/go-highlight/output"
-	"bitbucket.org/johnsto/go-highlight/output/term"
+	"github.com/johnsto/go-highlight"
+	_ "github.com/johnsto/go-highlight/lexers"
+	"github.com/johnsto/go-highlight/output"
+	"github.com/johnsto/go-highlight/output/term"
 	"github.com/spf13/pflag"
 )
 

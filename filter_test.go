@@ -6,7 +6,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	. "bitbucket.org/johnsto/go-highlight"
+	. "github.com/johnsto/go-highlight"
 )
 
 func TestFilters(t *testing.T) {

@@ -1,7 +1,7 @@
 package lexers
 
 import (
-	. "bitbucket.org/johnsto/go-highlight"
+	. "github.com/johnsto/go-highlight"
 	"strings"
 )
 

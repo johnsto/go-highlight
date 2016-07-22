@@ -5,8 +5,8 @@ import (
 	"io"
 	"testing"
 
-	. "bitbucket.org/johnsto/go-highlight"
-	"bitbucket.org/johnsto/go-highlight/lexers"
+	. "github.com/johnsto/go-highlight"
+	"github.com/johnsto/go-highlight/lexers"
 	"github.com/stretchr/testify/assert"
 )
 

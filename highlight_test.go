@@ -1,5 +1,5 @@
 package highlight_test
 
 import (
-	_ "bitbucket.org/johnsto/go-highlight"
+	_ "github.com/johnsto/go-highlight"
 )

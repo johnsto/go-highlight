@@ -3,7 +3,7 @@ package highlight_test
 import (
 	"testing"
 
-	. "bitbucket.org/johnsto/go-highlight"
+	. "github.com/johnsto/go-highlight"
 	"github.com/stretchr/testify/assert"
 )
 

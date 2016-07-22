@@ -1,6 +1,6 @@
 package lexers
 
-import . "bitbucket.org/johnsto/go-highlight"
+import . "github.com/johnsto/go-highlight"
 
 var CSS = Lexer{
 	Name:      "css",

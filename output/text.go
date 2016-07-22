@@ -5,7 +5,7 @@ import (
 	"io"
 	"os"
 
-	"bitbucket.org/johnsto/go-highlight"
+	"github.com/johnsto/go-highlight"
 )
 
 type TextOutputter struct {

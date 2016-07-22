@@ -5,7 +5,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	. "bitbucket.org/johnsto/go-highlight"
+	. "github.com/johnsto/go-highlight"
 )
 
 func TestStateMatch(t *testing.T) {

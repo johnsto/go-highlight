@@ -3,7 +3,7 @@ package output
 import (
 	"os"
 
-	"bitbucket.org/johnsto/go-highlight"
+	"github.com/johnsto/go-highlight"
 )
 
 type Outputter interface {

@@ -3,7 +3,7 @@ package term
 import (
 	"os"
 
-	"bitbucket.org/johnsto/go-highlight"
+	"github.com/johnsto/go-highlight"
 	"github.com/fatih/color"
 )
 
