@@ -6,6 +6,12 @@ var HTTP = Lexer{
 	Name: "http",
 	States: StatesSpec{
 		"root": {
+			// Request
+			{Regexp: `^([a-zA-Z]+)( )([^ ]+)( )(HTTP)(/)([0-9\.]+)(\r\n)$`,
+				SubTypes: []TokenType{Tag, Whitespace, String, Whitespace,
+					Tag, Punctuation, Tag, Whitespace},
+				State: "headers"},
+			// Response
 			{Regexp: `^(HTTP)(/)([0-9\.]+)( )([0-9]+)(.*)(\r\n)$`,
 				SubTypes: []TokenType{Tag, Punctuation, Tag,
 					Whitespace, Number, Whitespace, String, Whitespace},
