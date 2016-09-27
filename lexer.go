@@ -19,7 +19,7 @@ type Lexer struct {
 	MimeTypes []string
 }
 
-func (l Lexer) Format(r io.Reader, emit func(Token) error) error {
+func (l Lexer) Format(r *bufio.Reader, emit func(Token) error) error {
 	if l.Formatter == nil {
 		return l.Tokenize(r, emit)
 	}
@@ -29,13 +29,11 @@ func (l Lexer) Format(r io.Reader, emit func(Token) error) error {
 // Tokenize reads from the given input and emits tokens to the output channel.
 // Will end on any error from the reader, including io.EOF to signify the end
 // of input.
-func (l Lexer) Tokenize(r io.Reader, emit func(Token) error) error {
+func (l Lexer) Tokenize(br *bufio.Reader, emit func(Token) error) error {
 	states, err := l.States.Compile()
 	if err != nil {
 		return err
 	}
-
-	br := bufio.NewReaderSize(r, 128)
 
 	emit = l.Filters.Filter(emit)
 
@@ -126,7 +124,7 @@ func (l Lexer) Tokenize(r io.Reader, emit func(Token) error) error {
 
 // TokenizeString is a convenience method
 func (l Lexer) TokenizeString(s string) ([]Token, error) {
-	r := strings.NewReader(s)
+	r := bufio.NewReader(strings.NewReader(s))
 	tokens := []Token{}
 	err := l.Tokenize(r, func(t Token) error {
 		tokens = append(tokens, t)
