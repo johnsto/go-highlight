@@ -4,6 +4,8 @@
 
 A somewhat crude syntax highlighter loosely based on [Pygments](pygments.org).
 
+*See [chroma](https://github.com/alecthomas/chroma) for a newer, better, and far more complete syntax highlighter!*
+
 ## Installation
 
 go-highlight can be installed with the regular `go get` command:
